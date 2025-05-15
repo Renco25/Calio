@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Calio</string>
+    <string name="login">PRIHLÁSIŤ SA</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="register">Registrácia</string>
+    <string name="click_to_login">Prihlásiť sa</string>
+    <string name="click_to_register">Registrovat sa</string>
+    <string name="hello_world">Hello world</string>
+    <string name="logout">logout</string>
+    <string name="PRIHLÁSENIE">PRIHLÁSENIE</string>
+    <string name="btn_hl">POKRAČOVAŤ</string>
+
+</resources>
