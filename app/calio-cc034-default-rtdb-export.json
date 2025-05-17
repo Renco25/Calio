@@ -1,0 +1,21 @@
+{
+    "jedla": {
+      "id1": {
+        "nazov": "Kuracie prsia",
+        "kcal": 165,
+        "bielkoviny": 31,
+        "sacharidy": 0,
+        "tuky": 3.6,
+        "gramaz":100
+      },
+      "id2": {
+        "nazov": "Slepačie vajce",
+        "kcal": 90,
+        "bielkoviny": 7.43,
+        "sacharidy": 0.56,
+        "tuky": 6.52,
+        "gramaz":60
+      }
+    }
+  }
+  

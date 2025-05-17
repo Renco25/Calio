@@ -10,5 +10,9 @@
     <string name="logout">logout</string>
     <string name="PRIHLÁSENIE">PRIHLÁSENIE</string>
     <string name="btn_hl">POKRAČOVAŤ</string>
+    <string name="add">Pridať jedlo</string>
+    <string name="nacitavam">Načítavam jedlá...</string>
+    <string name="jedla">Jedlá</string>
+    <string name="vratit">Späť</string>
 
 </resources>
