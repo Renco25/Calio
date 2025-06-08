@@ -25,6 +25,16 @@
         android:layout_height="wrap_content"
         android:text="Odhlásiť sa" />
 
+
+    <TextView
+        android:id="@+id/kalorie_spolu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kalórie spolu: 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
     <TextView
         android:id="@+id/vybrane_jedlo"
         android:layout_width="match_parent"
@@ -35,5 +45,9 @@
         android:textSize="16sp"
         android:textColor="#000000"
         android:scrollbars="vertical" />
+
+
+
+
 
 </LinearLayout>

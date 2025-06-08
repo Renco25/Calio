@@ -1,3 +1,4 @@
+// AddJedlo.java
 package sk.upjs.ics.android.calio;
 
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ public class AddJedlo extends AppCompatActivity {
     ListView listViewJedla;
     ArrayList<Jedlo> jedlaList = new ArrayList<>();
     JedloAdapter adapter;
+    FirebaseUser currentUser;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,9 @@ public class AddJedlo extends AppCompatActivity {
             setResult(RESULT_CANCELED);
             finish();
         });
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        userId = currentUser != null ? currentUser.getUid() : null;
 
         databaseReference = FirebaseDatabase
                 .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -61,11 +69,28 @@ public class AddJedlo extends AppCompatActivity {
 
         listViewJedla.setOnItemClickListener((parent, view, position, id) -> {
             Jedlo vybraneJedlo = jedlaList.get(position);
+
+            if (userId != null) {
+                DatabaseReference userJedlaRef = FirebaseDatabase
+                        .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
+                        .getReference("uzivatelia")
+                        .child(userId)
+                        .child("vybrate_jedla");
+
+                userJedlaRef.push().setValue(vybraneJedlo)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddJedlo.this, "Jedlo uložené pre používateľa.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(AddJedlo.this, "Chyba pri ukladaní jedla.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
             Intent intent = new Intent();
             intent.putExtra("vybrane_jedlo", vybraneJedlo);
             setResult(RESULT_OK, intent);
             finish();
         });
     }
-
 }

@@ -1,21 +1,48 @@
 {
-    "jedla": {
-      "id1": {
-        "nazov": "Kuracie prsia",
-        "kcal": 165,
-        "bielkoviny": 31,
-        "sacharidy": 0,
-        "tuky": 3.6,
-        "gramaz":100
-      },
-      "id2": {
-        "nazov": "Slepačie vajce",
-        "kcal": 90,
-        "bielkoviny": 7.43,
-        "sacharidy": 0.56,
-        "tuky": 6.52,
-        "gramaz":60
+  "jedla": {
+    "id1": {
+      "nazov": "Kuracie prsia",
+      "kcal": 165,
+      "bielkoviny": 31,
+      "sacharidy": 0,
+      "tuky": 3.6,
+      "gramaz": 100
+    },
+    "id2": {
+      "nazov": "Slepačie vajce",
+      "kcal": 90,
+      "bielkoviny": 7.43,
+      "sacharidy": 0.56,
+      "tuky": 6.52,
+      "gramaz": 60
+    }
+  },
+  "uzivatelia": {
+    "UID_pouzivatela_1": {
+      "email": "user1@example.com",
+      "vybrate_jedla": {
+        "id1": {
+          "nazov": "Kuracie prsia",
+          "kcal": 165,
+          "bielkoviny": 31,
+          "sacharidy": 0,
+          "tuky": 3.6,
+          "gramaz": 100
+        }
+      }
+    },
+    "UID_pouzivatela_2": {
+      "email": "user2@example.com",
+      "vybrate_jedla": {
+        "id2": {
+          "nazov": "Slepačie vajce",
+          "kcal": 90,
+          "bielkoviny": 7.43,
+          "sacharidy": 0.56,
+          "tuky": 6.52,
+          "gramaz": 60
+        }
       }
     }
   }
-  
+}
