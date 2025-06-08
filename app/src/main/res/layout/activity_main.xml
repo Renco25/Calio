@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/user_details"
-        android:layout_width="wrap_content"
+    <!-- Riadok: Používateľ + Pridať jedlo -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Používateľ" />
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pridať jedlo" />
+        <TextView
+            android:id="@+id/user_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Používateľ"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red_custom"
+            android:padding="10dp"
+            android:text="Pridať jedlo"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Odhlásiť sa" />
-
 
     <TextView
         android:id="@+id/kalorie_spolu"
@@ -45,9 +62,5 @@
         android:textSize="16sp"
         android:textColor="#000000"
         android:scrollbars="vertical" />
-
-
-
-
 
 </LinearLayout>
