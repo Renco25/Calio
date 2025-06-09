@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user;
 
     ArrayList<Jedlo> vybraneJedla = new ArrayList<>();
+    ArrayList<String> jedloKeys = new ArrayList<>(); // Firebase kľúče
+
     DatabaseReference userJedlaRef;
 
     @Override
@@ -70,10 +72,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 vybraneJedla.clear();
+                jedloKeys.clear();
+
                 for (DataSnapshot jedloSnapshot : snapshot.getChildren()) {
                     Jedlo j = jedloSnapshot.getValue(Jedlo.class);
                     if (j != null) {
                         vybraneJedla.add(j);
+                        jedloKeys.add(jedloSnapshot.getKey());
                     }
                 }
                 zobrazVybraneJedla();
@@ -87,20 +92,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void zobrazVybraneJedla() {
-        jedlaContainer.removeAllViews(); // vyčisti predchádzajúce položky
+        jedlaContainer.removeAllViews();
         int celkoveKalorie = 0;
 
         for (int i = 0; i < vybraneJedla.size(); i++) {
             Jedlo j = vybraneJedla.get(i);
+            String key = jedloKeys.get(i);
+
             View itemView = LayoutInflater.from(this).inflate(R.layout.jedlo_item, jedlaContainer, false);
 
-            TextView poradieText = itemView.findViewById(R.id.poradieTextView);
+
             TextView nazovText = itemView.findViewById(R.id.nazovJedlaTextView);
             TextView kalorieText = itemView.findViewById(R.id.kalorieTextView);
+            ImageButton deleteButton = itemView.findViewById(R.id.deleteButton);
 
-            poradieText.setText((i + 1) + ".");
+
             nazovText.setText(j.nazov);
             kalorieText.setText(j.kcal + " kcal");
+
+            deleteButton.setOnClickListener(v -> {
+                userJedlaRef.child(key).removeValue()
+                        .addOnSuccessListener(aVoid -> Toast.makeText(this, "Jedlo vymazané", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(this, "Chyba: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            });
 
             jedlaContainer.addView(itemView);
             celkoveKalorie += j.kcal;
