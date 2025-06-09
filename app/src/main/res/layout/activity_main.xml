@@ -6,61 +6,186 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="16dp">
+    >
 
     <!-- Riadok: Používateľ + Pridať jedlo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:minHeight="70dp"
+        android:padding="16dp"
+        android:background="@color/red_custom"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/user_details"
-            android:layout_width="0dp"
+        <LinearLayout
+            style="@style/MyMaterialButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Používateľ"
-            android:textSize="16dp" />
+            android:background="@drawable/rounded_background"
+            android:orientation="horizontal"
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
+            android:padding="0dp"
 
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/red_custom"
-            android:padding="10dp"
-            android:text="Pridať jedlo"
-            android:textColor="@android:color/white"
-            android:textSize="16dp"
-            app:cornerRadius="10dp" />
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:srcCompat="@drawable/small_calio" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                style="@style/MyMaterialButton"
+                android:id="@+id/logout"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+
+                android:minWidth="180dp"
+                android:backgroundTint="@color/white"
+                android:padding="10dp"
+                android:colorControlHighlight="@null"
+                android:text="ODHLÁSIŤ SA"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Odhlásiť sa" />
-
-    <TextView
-        android:id="@+id/kalorie_spolu"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kalórie spolu: 0"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp" />
+        android:layout_marginBottom="8dp"
+        android:minHeight="70dp"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                app:srcCompat="@drawable/progressbar" />
+
+            <TextView
+                android:id="@+id/kalorie_spolu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:maxWidth="120dp"
+                android:text="Kalorie spolu 0"
+                android:textColor="@android:color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:minHeight="70dp"
+        android:paddingTop="30dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            style="@style/MyMaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/red_custom"
+            android:padding="0dp"
+            android:minHeight="70dp"
+            android:gravity="center_vertical">
+
+            <Button
+                style="@style/MyMaterialButton"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:maxWidth="250dp"
+                android:minWidth="180dp"
+                android:gravity="left"
+                android:backgroundTint="@color/white"
+                android:padding="10dp"
+                android:colorControlHighlight="@null"
+                android:text="Jedálniček"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="16sp"
+
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                style="@style/MyMaterialButton"
+                android:id="@+id/add"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:minWidth="150dp"
+                android:backgroundTint="@color/white"
+                android:padding="10dp"
+                android:colorControlHighlight="@null"
+                android:text="Pridať"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/jedla_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            />
+    </ScrollView>
 
     <TextView
-        android:id="@+id/vybrane_jedlo"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/user_details"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:padding="12dp"
-        android:text=""
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:scrollbars="vertical" />
+        android:text="Používateľ"
+
+        android:textSize="16dp" />
 
 </LinearLayout>

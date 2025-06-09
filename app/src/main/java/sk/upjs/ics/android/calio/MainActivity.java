@@ -2,10 +2,9 @@ package sk.upjs.ics.android.calio;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     Button button;
     TextView textView;
-    TextView vybraneJedloTextView;
     TextView kalorieSpoluTextView;
+    LinearLayout jedlaContainer;
     FirebaseUser user;
 
     ArrayList<Jedlo> vybraneJedla = new ArrayList<>();
@@ -35,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logout);
         textView = findViewById(R.id.user_details);
-        vybraneJedloTextView = findViewById(R.id.vybrane_jedlo);
         kalorieSpoluTextView = findViewById(R.id.kalorie_spolu);
+        jedlaContainer = findViewById(R.id.jedla_container);
         user = auth.getCurrentUser();
 
         if (user == null) {
@@ -88,20 +87,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void zobrazVybraneJedla() {
-        StringBuilder builder = new StringBuilder();
+        jedlaContainer.removeAllViews(); // vyčisti predchádzajúce položky
         int celkoveKalorie = 0;
 
         for (int i = 0; i < vybraneJedla.size(); i++) {
             Jedlo j = vybraneJedla.get(i);
-            builder.append(i + 1).append(". ")
-                    .append(j.nazov).append(" - ")
-                    .append(j.kcal).append(" kcal\n");
+            View itemView = LayoutInflater.from(this).inflate(R.layout.jedlo_item, jedlaContainer, false);
 
+            TextView poradieText = itemView.findViewById(R.id.poradieTextView);
+            TextView nazovText = itemView.findViewById(R.id.nazovJedlaTextView);
+            TextView kalorieText = itemView.findViewById(R.id.kalorieTextView);
+
+            poradieText.setText((i + 1) + ".");
+            nazovText.setText(j.nazov);
+            kalorieText.setText(j.kcal + " kcal");
+
+            jedlaContainer.addView(itemView);
             celkoveKalorie += j.kcal;
         }
 
-        vybraneJedloTextView.setText(builder.toString());
-        kalorieSpoluTextView.setText("Kalórie spolu: " + celkoveKalorie);
+        kalorieSpoluTextView.setText(celkoveKalorie + "/1800 kcal");
     }
 
     @Override
