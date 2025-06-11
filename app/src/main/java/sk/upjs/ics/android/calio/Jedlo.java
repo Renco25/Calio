@@ -9,6 +9,7 @@ public class Jedlo implements Serializable {
     public double sacharidy;
     public double tuky;
     public double gramaz;
+    public String obrazokUrl;
 
     public Jedlo() {
         // Potrebné pre Firebase

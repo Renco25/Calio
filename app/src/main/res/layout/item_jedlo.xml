@@ -2,29 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
-    <TextView
-        android:id="@+id/textNazov"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Jedlo"
-        android:textSize="16sp" />
+        android:minHeight="70dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_layout"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textKcal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100 kcal"
-        android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/imageJedlo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/small_calio" />
 
-    <TextView
-        android:id="@+id/textG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:text="g"
-        android:textSize="16sp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textNazov"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Jedlo veľmi dlhý názov jedla ktorý by sa nemal celý zobraziť"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textKcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 kcal"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="g"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
