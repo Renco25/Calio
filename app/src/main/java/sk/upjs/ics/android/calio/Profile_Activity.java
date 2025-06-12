@@ -33,6 +33,12 @@ public class Profile_Activity extends AppCompatActivity {
         saveBtn = findViewById(R.id.save_limit_btn);
         emailText = findViewById(R.id.email_text);
 
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
+
         if (user != null) {
             emailText.setText(user.getEmail());
 

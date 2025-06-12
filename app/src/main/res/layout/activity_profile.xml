@@ -61,43 +61,167 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            android:gravity="center">
+            >
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="224dp"
+                app:srcCompat="@drawable/calio" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="70dp"
+                android:padding="16dp"
+                android:background="@drawable/rounded_layout"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_background"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:minHeight="70dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:minWidth="150dp"
+                        android:text="@string/profil"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="25sp"
+                        android:gravity="center_vertical"
+                        />
+
+
+
+
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background"
+                        android:orientation="horizontal"
+                        android:backgroundTint="@color/gray300"
+                        android:minWidth="250dp"
+                        android:gravity="center"
+                        android:minHeight="50dp"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/email_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Používateľ"
+                            android:textSize="18sp"
+                            android:textColor="@color/dark_gray"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
 
             <TextView
-                android:id="@+id/email_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Používateľ"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:paddingBottom="10dp"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
                 android:text="Denný kalorický limit:"
-                android:textSize="16sp"
-                android:gravity="center" />
+                android:textSize="30sp"
+                />
 
-            <EditText
-                android:id="@+id/edit_limit"
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:hint="Zadaj limit (napr. 1800)"
-                android:inputType="number"
-                android:padding="10dp"
-                android:gravity="center" />
+                android:minHeight="70dp"
+                android:padding="16dp"
+                android:background="@drawable/rounded_layout"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:minHeight="40dp"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/edit_limit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:textColor="@color/black"
+                        android:hint="Zadaj limit (napr. 1800)"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minWidth="50dp"
+                    android:text="kcal"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="25sp"
+                    android:gravity="center_vertical|end" />
+            </LinearLayout>
 
 
 
-            <Button
-                android:id="@+id/save_limit_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Uložiť limit" />
+                android:gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/save_limit_btn"
+                    android:layout_width="wrap_content"
+                    android:minHeight="50dp"
+                    android:minWidth="160dp"
+                    android:backgroundTint="@color/gray300"
+                    android:layout_height="wrap_content"
+                    android:text="Uložiť" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:minWidth="160dp"
+                    android:backgroundTint="@color/red_custom"
+                    android:padding="10dp"
+
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:text="Späť" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

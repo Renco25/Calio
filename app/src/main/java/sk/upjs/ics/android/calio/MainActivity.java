@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logout);
-        textView = findViewById(R.id.user_details);
+
         kalorieSpoluTextView = findViewById(R.id.kalorie_spolu);
         jedlaContainer = findViewById(R.id.jedla_container);
         user = auth.getCurrentUser();
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
         } else {
-            textView.setText(user.getEmail());
+
 
             userRef = FirebaseDatabase
                     .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
