@@ -24,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user;
 
     ArrayList<Jedlo> vybraneJedla = new ArrayList<>();
-    ArrayList<String> jedloKeys = new ArrayList<>(); // Firebase kľúče
+    ArrayList<String> jedloKeys = new ArrayList<>();
 
     DatabaseReference userJedlaRef;
+    DatabaseReference userRef;
+
+    int kalorickyLimit = 1800; // default, ak nie je zadaný
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
             finish();
         } else {
             textView.setText(user.getEmail());
-            userJedlaRef = FirebaseDatabase
+
+            userRef = FirebaseDatabase
                     .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference("uzivatelia")
-                    .child(user.getUid())
-                    .child("vybrate_jedla");
+                    .child(user.getUid());
 
-            nacitajVybrateJedla();
+            userJedlaRef = userRef.child("vybrate_jedla");
+
+            // najskôr načítaj limit a potom jedlá
+            nacitajKalorickyLimit();
         }
 
         button.setOnClickListener(view -> {
@@ -64,6 +70,32 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), AddJedlo.class);
             startActivityForResult(intent, 1);
+        });
+
+        // Pridaj kliknutie na logo pre prechod do profilu
+        ImageView logoImage = findViewById(R.id.logo);
+        logoImage.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, Profile_Activity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void nacitajKalorickyLimit() {
+        userRef.child("kaloricky_limit").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Integer limit = snapshot.getValue(Integer.class);
+                if (limit != null) {
+                    kalorickyLimit = limit;
+                }
+                nacitajVybrateJedla(); // načítaj jedlá až po limite
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Nepodarilo sa načítať limit", Toast.LENGTH_SHORT).show();
+                nacitajVybrateJedla(); // fallback
+            }
         });
     }
 
@@ -101,11 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
             View itemView = LayoutInflater.from(this).inflate(R.layout.jedlo_item, jedlaContainer, false);
 
-
             TextView nazovText = itemView.findViewById(R.id.nazovJedlaTextView);
             TextView kalorieText = itemView.findViewById(R.id.kalorieTextView);
             ImageButton deleteButton = itemView.findViewById(R.id.deleteButton);
-
 
             nazovText.setText(j.nazov);
             kalorieText.setText(j.kcal + " kcal");
@@ -120,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             celkoveKalorie += j.kcal;
         }
 
-        kalorieSpoluTextView.setText(celkoveKalorie + "/1800 kcal");
+        kalorieSpoluTextView.setText(celkoveKalorie + "/" + kalorickyLimit + " kcal");
     }
 
     @Override

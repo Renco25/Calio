@@ -14,5 +14,11 @@
     <string name="nacitavam">Načítavam jedlá...</string>
     <string name="jedla">Jedlá</string>
     <string name="vratit">Späť</string>
+    <string name="ulo_i_limit">Uložiť limit</string>
+    <string name="odhl_si_sa">ODHLÁSIŤ SA</string>
+    <string name="todo">TODO</string>
+    <string name="zadaj_limit_napr_1800">Zadaj limit (napr. 1800)</string>
+    <string name="denn_kalorick_limit">Denný kalorický limit:</string>
+    <string name="pou_vate">Používateľ</string>
 
 </resources>

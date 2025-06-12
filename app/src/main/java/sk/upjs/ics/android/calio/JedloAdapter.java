@@ -29,7 +29,7 @@ public class JedloAdapter extends ArrayAdapter<Jedlo> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_jedlo, parent, false);
         }
-        ImageView imageJedlo = convertView.findViewById(R.id.imageJedlo);
+
         TextView textNazov = convertView.findViewById(R.id.textNazov);
         TextView textKcal = convertView.findViewById(R.id.textKcal);
         TextView textG = convertView.findViewById(R.id.textG);

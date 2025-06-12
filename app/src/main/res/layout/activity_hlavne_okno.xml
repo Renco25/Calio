@@ -39,7 +39,7 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Calio ti pomôže sledovať denný príjem kalórií. Zobrazí prehľadné štatistiky za rôzne časové obdobia. Porovnaj svoje výsledky s ostatnými používateľmi a motivuj sa."
+        android:text="Calio ti pomôže sledovať denný príjem kalórií. Vyber z premakanej databázy ktora je plná jedál len cakáme na teba."
         android:textAlignment="center"
         android:textSize="16sp"
         android:lineSpacingExtra="6dp"
