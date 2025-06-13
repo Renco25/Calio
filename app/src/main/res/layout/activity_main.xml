@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <!-- Horný panel (fixný) -->
+    <!-- Horný panel -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,12 +84,17 @@
                     android:background="@drawable/rounded_background"
                     android:padding="8dp">
 
+                    <!-- Dynamický progress bar -->
                     <ImageView
+                        android:id="@+id/progressBarImageView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/progressbar" />
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/light_progressbar"
+                        android:contentDescription="Progress bar" />
 
+                    <!-- Kalórie text -->
                     <TextView
                         android:id="@+id/kalorie_spolu"
                         android:layout_width="wrap_content"
@@ -97,14 +102,14 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:maxWidth="120dp"
-                        android:text="Kalorie spolu 0"
+                        android:text="0/1800 kcal"
                         android:textColor="@android:color/black"
                         android:textSize="25dp"
                         android:textStyle="bold" />
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Tlačidlá: Jedálniček + Pridať -->
+            <!-- Tlačidlá -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,10 +168,9 @@
                         android:textColor="@color/gray"
                         android:textSize="16sp" />
                 </LinearLayout>
-
             </LinearLayout>
 
-            <!-- Kontajner na jedlá -->
+            <!-- Jedlá -->
             <LinearLayout
                 android:id="@+id/jedla_container"
                 android:layout_width="match_parent"
@@ -174,9 +178,6 @@
                 android:orientation="vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp" />
-
-            <!-- Informácie o používateľovi -->
-
 
         </LinearLayout>
     </ScrollView>

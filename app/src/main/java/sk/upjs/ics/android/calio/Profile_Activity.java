@@ -13,13 +13,12 @@ import com.google.firebase.database.*;
 
 public class Profile_Activity extends AppCompatActivity {
 
-    FirebaseAuth auth;
-    FirebaseUser user;
-    EditText editLimit;
-    Button saveBtn;
-    TextView emailText;
-
-    DatabaseReference userRef;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private EditText editLimit;
+    private Button saveBtn;
+    private TextView emailText;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +31,22 @@ public class Profile_Activity extends AppCompatActivity {
         editLimit = findViewById(R.id.edit_limit);
         saveBtn = findViewById(R.id.save_limit_btn);
         emailText = findViewById(R.id.email_text);
-
         Button button2 = findViewById(R.id.button2);
+
+        // Tlačidlo späť
         button2.setOnClickListener(v -> {
             setResult(RESULT_CANCELED);
             finish();
         });
 
         if (user != null) {
-            emailText.setText(user.getEmail());
+            String email = user.getEmail();
+            emailText.setText(email);
+
+            // Klik na email zobrazí Toast
+            emailText.setOnClickListener(v ->
+                    Toast.makeText(Profile_Activity.this, "Email: " + email, Toast.LENGTH_SHORT).show()
+            );
 
             userRef = FirebaseDatabase
                     .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -64,22 +70,26 @@ public class Profile_Activity extends AppCompatActivity {
             });
         }
 
+        // Uloženie limitu
         saveBtn.setOnClickListener(view -> {
             String limitText = editLimit.getText().toString().trim();
             if (!limitText.isEmpty()) {
-                int newLimit = Integer.parseInt(limitText);
-                userRef.child("kaloricky_limit").setValue(newLimit)
-                        .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(Profile_Activity.this, "Limit uložený", Toast.LENGTH_SHORT).show();
-                            // Späť do MainActivity
-                            Intent intent = new Intent(Profile_Activity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        })
-                        .addOnFailureListener(e ->
-                                Toast.makeText(Profile_Activity.this, "Chyba: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                        );
+                try {
+                    int newLimit = Integer.parseInt(limitText);
+                    userRef.child("kaloricky_limit").setValue(newLimit)
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(Profile_Activity.this, "Limit uložený", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Profile_Activity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(Profile_Activity.this, "Chyba: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
+                } catch (NumberFormatException e) {
+                    Toast.makeText(Profile_Activity.this, "Neplatný formát čísla", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(Profile_Activity.this, "Zadaj limit", Toast.LENGTH_SHORT).show();
             }

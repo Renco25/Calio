@@ -14,4 +14,8 @@ public class Jedlo implements Serializable {
     public Jedlo() {
         // Potrebné pre Firebase
     }
+
+    public String getNazov() {
+        return nazov;
+    }
 }

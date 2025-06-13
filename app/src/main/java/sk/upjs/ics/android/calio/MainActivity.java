@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView kalorieSpoluTextView;
     LinearLayout jedlaContainer;
     FirebaseUser user;
+    ImageView progressBarImageView;
 
     ArrayList<Jedlo> vybraneJedla = new ArrayList<>();
     ArrayList<String> jedloKeys = new ArrayList<>();
@@ -38,17 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logout);
-
         kalorieSpoluTextView = findViewById(R.id.kalorie_spolu);
         jedlaContainer = findViewById(R.id.jedla_container);
+        progressBarImageView = findViewById(R.id.progressBarImageView);
         user = auth.getCurrentUser();
 
         if (user == null) {
             startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
         } else {
-
-
             userRef = FirebaseDatabase
                     .getInstance("https://calio-cc034-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference("uzivatelia")
@@ -56,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
             userJedlaRef = userRef.child("vybrate_jedla");
 
-            // najskôr načítaj limit a potom jedlá
             nacitajKalorickyLimit();
         }
 
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         });
 
-        // Pridaj kliknutie na logo pre prechod do profilu
         ImageView logoImage = findViewById(R.id.logo);
         logoImage.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Profile_Activity.class);
@@ -88,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 if (limit != null) {
                     kalorickyLimit = limit;
                 }
-                nacitajVybrateJedla(); // načítaj jedlá až po limite
+                nacitajVybrateJedla();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MainActivity.this, "Nepodarilo sa načítať limit", Toast.LENGTH_SHORT).show();
-                nacitajVybrateJedla(); // fallback
+                nacitajVybrateJedla();
             }
         });
     }
@@ -151,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         kalorieSpoluTextView.setText(celkoveKalorie + "/" + kalorickyLimit + " kcal");
+
+        // 🌡️ Nastavenie správneho progress baru podľa kalórií
+        if (celkoveKalorie == 0) {
+            progressBarImageView.setImageResource(R.drawable.light_progressbar);
+        } else if (celkoveKalorie < kalorickyLimit / 2) {
+            progressBarImageView.setImageResource(R.drawable.light_progressbar);
+        } else if (celkoveKalorie >= kalorickyLimit / 2 && celkoveKalorie <= kalorickyLimit - 150) {
+            progressBarImageView.setImageResource(R.drawable.medium_progressbar);
+        } else if (Math.abs(celkoveKalorie - kalorickyLimit) <= 150) {
+            progressBarImageView.setImageResource(R.drawable.progressbar);
+        } else if (celkoveKalorie > kalorickyLimit + 150) {
+            progressBarImageView.setImageResource(R.drawable.prekroceny_progressbar);
+        }
     }
 
     @Override
