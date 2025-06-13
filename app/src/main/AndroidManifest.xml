@@ -18,7 +18,7 @@
         tools:targetApi="35">
 
         <activity
-            android:name=".AddJedlo"
+            android:name=".hlavne_okno"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,10 +26,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".hlavne_okno" android:exported="true" />
+        
         <activity android:name=".Login" android:exported="true" />
         <activity android:name=".Register" android:exported="true" />
         <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".AddJedlo" android:exported="true" />
         <activity
             android:name=".Profile_Activity"
             android:exported="true" />
